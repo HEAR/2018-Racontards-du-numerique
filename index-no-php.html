@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Racontards du numérique</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<section id="apropos">
+		<h1>Titre</h1>
+	</section>
+
+	<section id="liste">
+
+		<ul id="titres">
+			<li data-dossier="1_24h_around" data-nombre="5">
+				<h2>24H around the world</h2>
+				<div class="content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veritatis rerum at dolor cumque, nulla, recusandae fuga accusantium voluptatem repellendus ad tenetur deleniti et itaque neque aperiam voluptatibus molestias. Molestias.</p>
+					<ul>
+						<li>item 1</li>
+						<li>item 2</li>
+						<li>item 3</li>
+						<li>item 4</li>
+						<li>item 5</li>
+					</ul>	
+				</div>
+			</li>
+			<li data-dossier="2_identite_khmere" data-nombre="2">
+				<h2>Identité khmère</h2>
+				<div class="content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veritatis rerum at dolor cumque, nulla, recusandae fuga accusantium voluptatem repellendus ad tenetur deleniti et itaque neque aperiam voluptatibus molestias. Molestias.</p>
+					<ul>
+						<li>item 1</li>
+						<li>item 2</li>
+						<li>item 3</li>
+						<li>item 4</li>
+						<li>item 5</li>
+					</ul>	
+				</div>
+			</li>
+			<li data-dossier="3_open_dictionnary" data-nombre="0">
+				<h2>Open dictionnary</h2>
+				<div class="content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veritatis rerum at dolor cumque, nulla, recusandae fuga accusantium voluptatem repellendus ad tenetur deleniti et itaque neque aperiam voluptatibus molestias. Molestias.</p>
+					<ul>
+						<li>item 1</li>
+						<li>item 2</li>
+						<li>item 3</li>
+						<li>item 4</li>
+						<li>item 5</li>
+					</ul>	
+				</div>
+			</li>
+		</ul>
+		
+	</section>
+
+	<div class="conteneur">
+		<div class="viewer">
+			<ul>
+			</ul>
+		</div>
+	</div>
+
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script>
+		
+		$(document).ready(function(){
+
+			// quand on clique sur un élément de la liste #titres
+			$("#titres li").click(function(){
+				
+				// on récupère l'attribut id
+				var dossier = $(this).data("dossier");
+				var nbr_images = $(this).data("nombre");
+
+				var contenu = "<ul>";
+
+				for(var i = 1; i<= nbr_images; i++){
+					contenu += "<li><img src='projets/" + dossier + "/images/pict-" + formatNumberLength(i,3) + ".jpg'><li>\n";
+				}
+
+				contenu += "<li class='texte'>" + $(this).find(".content").html() + "</li>\n";
+
+				contenu += "</ul>";
+
+
+				$('.viewer').html(contenu);
+				$(".viewer>ul>li").not(":first-child").hide();					
+				$(".conteneur").show();
+				
+
+			})
+
+
+			$(".conteneur")
+			.hide()
+			.click(function(){
+				$(this).hide();
+			});
+
+			
+
+			$(".viewer").mousemove(function(event){
+
+				// $(".viewer li").length => nombre d'éléments li dans la balise ul de .viewer
+				let largeur = $(".viewer").width() / $(".viewer>ul>li").length;
+
+				// event.originalEvent.offsetX => position X de la souris dans le viewer
+				let index = Math.floor( event.originalEvent.offsetX /largeur);
+
+				console.log(event.originalEvent.offsetX, $(".viewer>ul>li").length, index);
+
+				$(".viewer>ul>li").hide();
+				$(".viewer>ul>li").eq( index ).show();
+			});
+		});
+
+		/**
+		 * formatNumberLength function
+		 * pour écrire un nombre avec un zéro initial
+		 * cf https://stackoverflow.com/questions/1127905/how-can-i-format-an-integer-to-a-specific-length-in-javascript
+		 */
+		function formatNumberLength(num, length) {
+		    let r = "" + num;
+		    while (r.length < length) {
+		        r = "0" + r;
+		    }
+		    return r;
+		}
+
+	</script>
+	
+</body>
+</html>
