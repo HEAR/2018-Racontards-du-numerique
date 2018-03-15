@@ -41,6 +41,7 @@ body {
   height: 60vmin;
   margin:0;
   padding:0;
+  pointer-events: none;
 }
 .viewer>ul>li p{
   margin:0;
@@ -50,4 +51,3 @@ body {
   max-width: 80vmin;
   max-height: 60vmin;
 }
-
