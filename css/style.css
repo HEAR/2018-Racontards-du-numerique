@@ -4,6 +4,11 @@ body {
   margin: 0;
 }
 
+
+#titres li .content{
+  display: none;
+}
+
 /* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
 
 .conteneur {

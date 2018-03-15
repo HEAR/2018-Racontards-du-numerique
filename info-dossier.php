@@ -4,7 +4,7 @@
 $dossier = $_GET['dossier'];
 
 
-foreach( GLOB("projets/$dossier/images/*.jpg") as $image ){
+foreach( GLOB("projets/$dossier/images/*.{jpg,png,gif}", GLOB_BRACE) as $image ){
 
 	echo "<li><img src='$image'></li>\n";
 

@@ -23,7 +23,7 @@
 				$identifiant = str_replace("projets/", "",$dossier );
 
 
-				echo "<li id='$identifiant'>{$json->titre}</li>\n";
+				echo "<li id='$identifiant'><h2>{$json->titre}</h2></li>\n";
 
 			}
 
@@ -45,8 +45,6 @@
 		
 		$(document).ready(function(){
 
-			var largeur;
-
 			// quand on clique sur un élément de la liste #titres
 			$("#titres li").click(function(){
 				
@@ -64,10 +62,7 @@
 					var contenu = msg;
 
 					$('.viewer').html(contenu);
-					$(".viewer li").not(":first-child").hide();
-
-					largeur = $(".viewer").width() / $(".viewer li").length;
-					
+					$(".viewer>ul>li").not(":first-child").hide();					
 					$(".conteneur").show();
 				});
 
@@ -85,21 +80,16 @@
 			$(".viewer").mousemove(function(event){
 
 				// $(".viewer li").length => nombre d'éléments li dans la balise ul de .viewer
-				largeur = $(".viewer").width() / $(".viewer li").length;
+				let largeur = $(".viewer").width() / $(".viewer>ul>li").length;
 
 				// event.originalEvent.offsetX => position X de la souris dans le viewer
 				let index = Math.floor( event.originalEvent.offsetX /largeur);
 
-				console.log(event.originalEvent.offsetX, $(".viewer li").length, index);
+				console.log(event.originalEvent.offsetX, $(".viewer>ul>li").length, index);
 
-				$(".viewer li").hide();
-				$(".viewer li").eq( index ).show();
-
+				$(".viewer>ul>li").hide();
+				$(".viewer>ul>li").eq( index ).show();
 			});
-
-
-
-
 		});
 
 	</script>
